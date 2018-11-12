@@ -45,8 +45,6 @@
 		//login check
 		public function check_login($email,$password){
 
-			
-			echo $password;
 			$login_query = "SELECT * from users WHERE email='$email'";
 
 			$result = $this->db->query($login_query);

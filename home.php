@@ -30,8 +30,6 @@
     if(isset($_POST['title']) and isset($_POST['author']) and isset($_POST['year']) and isset($_POST['isbn'])){
 
 
-      
-
       //get book details
       $title = $_POST['title'];
       $author = $_POST['author'];
@@ -64,6 +62,10 @@
     } else {
       printWarning("Isbn needed to delete book");
     }
+  }
+
+  if(isset($_POST['updateBook'])){
+
   }
 
 ?>
@@ -109,40 +111,14 @@ tr:nth-child(even) {
 
 <h1>My Library</h1>
 <h2>Welcome <?php echo $fname . " " . $lname; ?></h2>
-        <form role="search">
+        
           <div class="search-control">
               <input type="search" id="site-search" name="find"
                      placeholder="Search Books"
                      >
               <button>Search</button>
           </div>
-
-
-      </form mwthod="post" action="home.php">
-       <br />  <br />
-          <table>
-              <tr>
-              <th>Title</th>
-              <th>Year</th>
-              <th>Author</th>
-              <th>ISBN</th>
-              </tr>
-              <tr>
-                <td><input type = "text"  name = "title_up"/></td>
-                <td><input type = "text"  name = "year_up"/></td>
-                <td><input type = "text"  name = "author_up"/></td>
-                <td><input type = "text"  name = "isbn_up"/></td>
-              </tr>
-          </table>
-
-        <input class="btn btn-info" type = "submit"  name = "updateBook"  value = "Update" />
-        
- 
-
-        <br />  <br />
-    </form>
     
-
     <table class="table">
       <thead>
         <tr>
@@ -161,6 +137,7 @@ tr:nth-child(even) {
       <div class="card" style="width: 18rem;">
         <div class="card-head"><h3> Add New Book</h3></div>
         <div class="card-body">
+
           <form method="post" action="home.php">
             <div class ="form-group">
               <label for="title"><b>Title</b></label>
@@ -185,6 +162,7 @@ tr:nth-child(even) {
           </form>
         </div>
       </div>
+
       <div class="card" style="width: 18rem;">
         <div class="card-head"><h3> Delete Book</h3></div>
         <div class="card-body">
