@@ -64,9 +64,6 @@
     }
   }
 
-  if(isset($_POST['updateBook'])){
-
-  }
 
 ?>
 
