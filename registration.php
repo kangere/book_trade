@@ -11,7 +11,7 @@
 		
 
 		if($register){
-			printSuccess("Regstration successful");
+			//Registration successful
             header("location:login.php");
 		} else {
 			printError('Registration failed. Email or Username already exists please try again');
