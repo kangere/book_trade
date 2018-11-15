@@ -25,6 +25,7 @@
 			$sql="SELECT * FROM users WHERE email='$email'";
 
 			$check = $this->db->query($sql);
+			
 			$count_row = $check->num_rows;
 
 			if($count_row == 0){
@@ -45,6 +46,7 @@
 		//login check
 		public function check_login($email,$password){
 
+			
 			$login_query = "SELECT * from users WHERE email='$email'";
 
 			$result = $this->db->query($login_query);
