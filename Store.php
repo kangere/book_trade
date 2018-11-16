@@ -33,104 +33,24 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
 
-<style type="text/css">
-table.greenTable {
-  font-family: "Arial Black", Gadget, sans-serif;
-  border: 6px solid #FFFFFF;
-  background-color: #2A1303;
-  width: 100%;
-  height: 300px;
-  text-align: center;
-  color: #E6F7E1;
-}
-table.greenTable td, table.greenTable th {
-  border: 1px solid #AFAFAF;
-  padding: 3px 2px;
-}
-table.greenTable tbody td {
-  font-size: 13px;
-}
-
-table.greenTable td:nth-child(1) {
-   font-size: 13px;
-}
-
-
-
-//
-* {
-    box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
-
-/* Style the header */
-.header { 
-    background-image: url("headerpic.jpg");
-    padding: 20px;
-    text-align: center;
-    font-family: 'Lobster', Georgia, Times, serif;
- font-size: 60px;
- line-height: 90px;
- color: #f2f2f2;
-}
-
-
-/* Style the top navigation bar */
-.topnav {
-    overflow: hidden;
-    background-color: #2A1303;
-
-}
-
-/* Style the topnav links */
-.topnav a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-/* Change color on hover */
-.topnav a:hover {
-    background-color: #2A1303;
-    color: #2A1303;
-}
-
-</style>
-
-
-
-
-
-
-
-
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</head>
 
+<body>
+  <?php getNavBar($fname,$lname) ?>
 
-<div class="header"">
-  <h1>Book Store</h1>
-</div>
-<div class="topnav">
-  <a href="Store.php">Book Store</a>
-  <a href="home.php">My Library</a>
-  <a href="home.php?q=logout">Logout</a>
-</div>
-
-
-<<table class="greenTable">
-<tbody>
-<?php $owned->get_ownedbooks();?>
-</tbody>
-</tr>
-</table>
+  <table class="table">
+  <tbody>
+  <?php $owned->get_ownedbooks();?>
+  </tbody>
+  </tr>
+  </table>
 
 </body>
 </html>

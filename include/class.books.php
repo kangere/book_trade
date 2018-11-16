@@ -62,6 +62,40 @@
 	
 		}
 
+		public function displayBookUpdate($isbn){
+
+			$sql = "SELECT * FROM books WHERE ISBN = '$isbn'";
+
+			$result = $this->db->query($sql);
+
+			$row = $result->fetch_array(MYSQLI_NUM);
+
+			echo "<form method=\"post\" action=\"update.php?isbn=".$row[3]."\">";
+			echo "<table class=\"table\">";
+			echo"<thead>";		
+			echo "<tr>" ;    
+			echo "<td>Title</td>";         
+			echo "<td>Author</td>";         
+			echo "<td>Year</td>" ;        
+			echo "<td>ISBN</td>";         
+			echo "</tr>";       
+			echo "</thead>";     
+			echo "<tbody>";
+
+			echo "<td align=\"center\"><input name=\"title\" type =\"text\"
+					class=\"form-control\" value=\"".$row[0]."\" size=\"25\"/></td>";
+			echo "<td align=\"center\"><input name=\"author\" type =\"text\"
+					class=\"form-control\" value=\"".$row[1]."\" size=\"25\"/></td>";
+			echo "<td align=\"center\"><input name=\"year\" type =\"text\"
+					class=\"form-control\" value=".$row[2]." size=\"25\"/></td>";
+			echo "<td align=\"center\">".$row[3]."</td>";
+
+			echo "</tbody></table>";
+			echo "<input type=\"submit\" class=\"btn btn-primary\" name=\"update\"/>";
+			echo "</form>";      
+		}
+
+
 		public function get_user_library($email){
 			//TODO Implement
 			$library_query = "SELECT title,author,year, b.isbn FROM books b JOIN ownedBooks ob on b.isbn = ob.isbn where ob.email = '$email'";
@@ -77,6 +111,8 @@
 				echo "<td>".$row[1]."</td>";
 				echo "<td>".$row[2]."</td>";
 				echo "<td>".$row[3]."</td>";
+				echo "<td align=\"center\"><a href=\"update.php?isbn=".
+					$row[3]."\">Update</a></td>";
 				echo "</tr>";
 			}
 		}

@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	include_once 'include/class.user.php';
+    include_once 'include/utils.php';
 
 	$user = new User();
 
@@ -13,7 +14,7 @@
 			//Registration Success
 			header("location:home.php");
 		}else {
-			echo 'Wrong username or password';
+			printError('Wrong username or password');
 		}
 	}
 ?>

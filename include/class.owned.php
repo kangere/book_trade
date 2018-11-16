@@ -41,19 +41,27 @@
 				printError($this->db->error);
 
 			$col = 0;
+			echo "<div class=\"container mt-2 mb-2\">";
 			while ($row = $result->fetch_array(MYSQLI_NUM)){
-				if($col == 0){
-					echo "<tr>";
-				}
-
-				echo "<td>","<h1>".$row[0]."</h1>","<br>","by ".$row[1]."<br>".$row[2]."<br>".$row[3]."<br>",'<input type="submit" class="btn btn-primary" value="Detail">'." "."</td>";
-				$col++;
-			if($col == 3) {
-				  echo "</tr>";
-				  $col = 0;
-				} 
 				
+				if($col === 0){
+					echo "<div class=\"row\">";
+				}
+				echo "<div class=\"col-sm\">";
+				echo "<div class=\"card\" style=\"width: 18rem;\">";
+				echo "<div class=\"card-body\">";
+				echo "<h5 class=\"card-title\">".$row[0]."</h1><br><p class=\"card-text\"> Author: by ".$row[1].
+					"</p><br><p class=\"card-text\">Year Published: ".$row[2]."</p><br><p class=\"card-text\"> ISBN: ".$row[3]."</p><br><input type=\"submit\" class=\"btn btn-primary\" value=\"Detail\">";
+				echo "</div></div>";
+				echo "</div>";
+		
+				$col += 1;
+				if($col === 3){
+					$col = 0;
+					echo "</div>";
+				}
 			}
+			echo "</div>";
 		}
 
 		public function deleteBookOwned($email,$isbn){
