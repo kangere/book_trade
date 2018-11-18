@@ -2,20 +2,14 @@
 
 
 	
-	include_once "db_config.php";
 	include_once "utils.php";
+	include_once "conn.php";
+	include_once "class.authors.php";
 
-	class OwnedBooks{
-
-		public $db;
+	class OwnedBooks extends Connection{
 
 		function __construct(){
-			$this->db = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-
-			if($this->db->connect_errno){
-				printError($this->db->connect_errno);
-				exit;
-			}
+			parent::__construct();
 		}
 
 
@@ -32,8 +26,8 @@
 				return false;
 		}
 		public function get_ownedbooks(){
-			//TODO Implement
-			$library_query = "SELECT title,author,year, b.isbn FROM books b JOIN ownedBooks ob on b.isbn = ob.isbn ";
+			
+			$library_query = "SELECT title,year, b.isbn FROM books b JOIN ownedBooks ob on b.isbn = ob.isbn ";
 
 			$result = $this->db->query($library_query);
 			
@@ -50,8 +44,18 @@
 				echo "<div class=\"col-sm\">";
 				echo "<div class=\"card\" style=\"width: 18rem;\">";
 				echo "<div class=\"card-body\">";
-				echo "<h5 class=\"card-title\">".$row[0]."</h1><br><p class=\"card-text\"> Author: by ".$row[1].
-					"</p><br><p class=\"card-text\">Year Published: ".$row[2]."</p><br><p class=\"card-text\"> ISBN: ".$row[3]."</p><br><input type=\"submit\" class=\"btn btn-primary\" value=\"Detail\">";
+				echo "<h5 class=\"card-title\">".$row[0]."</h1>";
+
+				$auth = new Authors();
+				$authors = $auth->getAuthors($row[2]);
+
+				foreach($authors as $value){
+					echo "<br><p class=\"card-text\"> Author: ".$value[0].
+					"</p><br>";	
+				}
+				
+				
+				echo "<p class=\"card-text\">Year Published: ".$row[1]."</p><br><p class=\"card-text\"> ISBN: ".$row[2]."</p><br><input type=\"submit\" class=\"btn btn-primary\" value=\"Detail\">";
 				echo "</div></div>";
 				echo "</div>";
 		

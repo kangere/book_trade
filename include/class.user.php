@@ -2,19 +2,12 @@
 	ini_set('display_errors', 'On');
 	error_reporting(E_ALL);
 
-	include_once "db_config.php";
+	include_once "conn.php";
 
-	class User{
-
-		public $db;
+	class User extends Connection{
 
 		function __construct(){
-			$this->db = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-
-			if($this->db->connect_errno){
-				printf("Connect failed:%s\n",$this->db->connect_errno);
-				exit;
-			}
+			parent::__construct();
 		}
 
 		//Registration

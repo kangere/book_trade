@@ -3,22 +3,16 @@
 	ini_set('display_errors', 'On');
 	error_reporting(E_ALL);
 
-	include_once "db_config.php";
+	
 	include_once "class.owned.php";
 	include_once "utils.php";
+	include_once "class.authors.php";
+	include_once "conn.php";
 
-	class Book{
-
-		public $db;
+	class Book extends Connection{
 
 		function __construct(){
-			$this->db = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-
-			if($this->db->connect_errno){
-				printf("Connect failed:%s\n",$this->db->connect_errno);
-				exit;
-			}
-
+			parent::__construct();
 		}
 
 		//checks if book already exists
@@ -38,14 +32,19 @@
 		public function insert_book($email,$title,$author,$year,$isbn){
 
 			if(!$this->exists($isbn)){
-				$insert_sql = "INSERT INTO books(title,author,year,isbn)
-						VALUES ('$title','$author','$year','$isbn')";
+				$insert_sql = "INSERT INTO books(title,year,isbn)
+						VALUES ('$title','$year','$isbn')";
 
 				$result = $this->db->query($insert_sql);
 
 				if(!$result)
 					printError($this->db->error);
 
+				$auth = new Authors();
+
+				foreach($author as $key=>$value){
+					$auth->insert($value,$isbn);
+				}
 			}
 
 			$ownedTable = new OwnedBooks();
@@ -63,6 +62,10 @@
 		}
 
 		public function displayBookUpdate($isbn){
+
+			$auth = new Authors();
+
+			$authors = $auth->getAuthors($isbn);
 
 			$sql = "SELECT * FROM books WHERE ISBN = '$isbn'";
 
@@ -87,8 +90,8 @@
 			echo "<td align=\"center\"><input name=\"author\" type =\"text\"
 					class=\"form-control\" value=\"".$row[1]."\" size=\"25\"/></td>";
 			echo "<td align=\"center\"><input name=\"year\" type =\"text\"
-					class=\"form-control\" value=".$row[2]." size=\"25\"/></td>";
-			echo "<td align=\"center\">".$row[3]."</td>";
+					class=\"form-control\" value=".$row[1]." size=\"25\"/></td>";
+			echo "<td align=\"center\">".$row[2]."</td>";
 
 			echo "</tbody></table>";
 			echo "<input type=\"submit\" class=\"btn btn-primary\" name=\"update\"/>";
@@ -97,22 +100,34 @@
 
 
 		public function get_user_library($email){
-			//TODO Implement
-			$library_query = "SELECT title,author,year, b.isbn FROM books b JOIN ownedBooks ob on b.isbn = ob.isbn where ob.email = '$email'";
+		
+			$library_query = "SELECT title,year, b.isbn FROM books b JOIN ownedBooks ob on b.isbn = ob.isbn where ob.email = '$email'";
 
 			$result = $this->db->query($library_query);
 
 			if(!$result)
 				printError($this->db->error);
 
+			$auth = new Authors();
+
 			while ($row = $result->fetch_array(MYSQLI_NUM)){
+				$authors = $auth->getAuthors($row[2]);
+
 				echo "<tr>";
 				echo "<td>".$row[0]."</td>";
+				
+				//TODO: print all authors
+				echo "<td>";
+				foreach($authors as $value){
+					echo $value[0]."<br>";
+				}
+				echo "</td>";
+
+
 				echo "<td>".$row[1]."</td>";
 				echo "<td>".$row[2]."</td>";
-				echo "<td>".$row[3]."</td>";
 				echo "<td align=\"center\"><a href=\"update.php?isbn=".
-					$row[3]."\">Update</a></td>";
+					$row[2]."\">Update</a></td>";
 				echo "</tr>";
 			}
 		}
