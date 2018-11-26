@@ -33,23 +33,20 @@
       			<input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">
       			<button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>
     		</form>
-
-    	
-       
-      
-
 		  </div>
+
 		  <li class=\"nav-item dropdown\">
 		        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
 		          ".$fname." ".$lname."
 		        </a>
-				  <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">
-		          <a class=\"dropdown-item\" href=\"#\">Edit Profile</a>
-		          <a class=\"dropdown-item\" href=\"#\">Change Password</a>
-		          <div class=\"dropdown-divider\"></div>
-		          <a class=\"dropdown-item\" href=\"home.php?q=logout\">Logout</a>
+				<div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">
+		          	<a class=\"dropdown-item\" href=\"#\">Edit Profile</a>
+		          	<a class=\"dropdown-item\" href=\"#\">Change Password</a>
+		          	<div class=\"dropdown-divider\"></div>
+		          	<a class=\"dropdown-item\" href=\"home.php?q=logout\">Logout</a>
 		        </div>
-        </li>
+       	</li>
+		  
 		  </nav>";
 	}
 

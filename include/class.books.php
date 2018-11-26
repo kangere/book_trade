@@ -73,7 +73,7 @@
 
 			$row = $result->fetch_array(MYSQLI_NUM);
 
-			echo "<form method=\"post\" action=\"update.php?isbn=".$row[3]."\">";
+			echo "<form method=\"post\" action=\"update.php?isbn=".$row[2]."\">";
 			echo "<table class=\"table\">";
 			echo"<thead>";		
 			echo "<tr>" ;    
@@ -87,8 +87,22 @@
 
 			echo "<td align=\"center\"><input name=\"title\" type =\"text\"
 					class=\"form-control\" value=\"".$row[0]."\" size=\"25\"/></td>";
-			echo "<td align=\"center\"><input name=\"author\" type =\"text\"
-					class=\"form-control\" value=\"".$row[1]."\" size=\"25\"/></td>";
+
+			echo "<td align=\"center\">";
+			echo "<div class =\"form-group\" id=\"author\">";
+			foreach($authors as $value){
+				echo "<div class=\"entry input-group col-xs-3\"><input name=\"author[0]\" type =\"text\"
+					class=\"form-control\" value=\"".$value[0]."\" size=\"25\"/><span class=\"input-group-btn\">
+                            <button class=\"btn btn-success btn-add\" type=\"button\" onclick=\"addAuthor()\">
+                                +
+                            </button>
+                        </span></div>";	
+			}
+
+			echo "</div></td>";
+			
+
+
 			echo "<td align=\"center\"><input name=\"year\" type =\"text\"
 					class=\"form-control\" value=".$row[1]." size=\"25\"/></td>";
 			echo "<td align=\"center\">".$row[2]."</td>";
@@ -98,6 +112,7 @@
 			echo "</form>";      
 		}
 
+		
 
 		public function get_user_library($email){
 		

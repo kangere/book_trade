@@ -19,9 +19,9 @@
 			$check = $this->db->query($query);
 
 			if($check)
-				printError("unable to insert author".$name);
+				printSucceess("Inserted Author: ".$name);
 			else
-				printSuccess("Inserted author: ".$name);
+				printError("Unable to insert Author: ".$name);
 		}
 
 
