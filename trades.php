@@ -36,7 +36,7 @@
 <body>
 	<?php 
 
-		getNavBar($fname,$lname);
+		getNavBar($fname,$lname,$email);
 
 		echo "<h3> My Transactions </h3>";
 

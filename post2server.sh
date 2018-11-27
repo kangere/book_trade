@@ -15,5 +15,8 @@ sudo cp details.php $dest
 sudo cp requests.php $dest
 sudo cp request_book.php $dest
 sudo cp trades.php $dest
+sudo cp changepassword.php $dest
+sudo cp search-form.php $dest
+sudo cp editProfile.php $dest
 
 echo "files copied successfully"

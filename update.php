@@ -1,7 +1,14 @@
 <?php
+	session_start();
+	include_once 'include/class.user.php';
  	include_once "include/class.books.php";
 
  	$books = new Book();
+ 	$user = new User();
+ 	
+ 	if(!$user->get_session()){
+    	header("location:login.php");
+  	}
 
  	$isbn = $_GET['isbn'];
 
@@ -10,6 +17,7 @@
  		$author = $_POST['author'];
  		$year = $_POST['year'];
 
+ 		
  		$books->updateBookInfo($title,$author,$year,$isbn);
 
  		header("location:home.php");

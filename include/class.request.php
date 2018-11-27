@@ -118,8 +118,8 @@
 				
 				echo "<tr>";
 				echo "<td>".$row[3]."</td>";
-				echo "<td>".$book->getBookTitle($row[2])."</td>";
-				echo "<td>".$book->getBookTitle($row[4])."</td>";
+				echo "<td>".$this->book->getBookTitle($row[2])."</td>";
+				echo "<td>".$this->book->getBookTitle($row[4])."</td>";
 				echo "<td><a href=\"requests.php?status=accept&b_isbn=".$row[2]."&t_isbn=".$row[4]."&r_email=".$row[3]."\">Accept</a></td>";
 				echo "<td><a href=\"requests.php?status=reject&b_isbn=".$row[2]."\">Decline</a></td>";
 				echo "</tr>";

@@ -39,8 +39,11 @@
       $isbn = $_POST['isbn'];
       $cond  = $_POST['condition'];
 
+
       if($book->insert_book($email,$title,$author,$year,$isbn,$cond)){
          printSuccess("Book Inserted");
+      } else {
+        printError("Unable to Insert Books");
       }
          
 
@@ -177,13 +180,13 @@
             <div class ="form-group">
               <label for="isbn"><b>Book Condition</b></label>
               <div class="radio">
-                <label><input type="radio" name="condition" checked>Like-New</label>
+                <label><input type="radio" name="condition" value="Like-New"checked>Like-New</label>
               </div>
               <div class="radio">
-                <label><input type="radio" name="condition">Used</label>
+                <label><input type="radio" name="condition" value="Used">Used</label>
               </div>
               <div class="radio">
-                <label><input type="radio" name="condition">Damaged</label>
+                <label><input type="radio" name="condition" value="Damaged">Damaged</label>
               </div>
             </div>
 

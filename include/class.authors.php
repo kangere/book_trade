@@ -19,7 +19,7 @@
 			$check = $this->db->query($query);
 
 			if($check)
-				printSucceess("Inserted Author: ".$name);
+				printSuccess("Inserted Author: ".$name);
 			else
 				printError("Unable to insert Author: ".$name);
 		}
@@ -35,6 +35,7 @@
 
 			return $result->fetch_all();
 		}
+
 
 
 	}

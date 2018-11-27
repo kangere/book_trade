@@ -11,8 +11,11 @@
 
 	class Book extends Connection{
 
+		protected $author;
+
 		function __construct(){
 			parent::__construct();
+			$this->author = new Authors();
 		}
 
 		//checks if book already exists
@@ -27,6 +30,8 @@
 				return false;
 			}
 		}
+
+
 
 		public function getBookTitle($isbn)
 		{
@@ -108,12 +113,8 @@
 			echo "<td align=\"center\">";
 			echo "<div class =\"form-group\" id=\"author\">";
 			foreach($authors as $value){
-				echo "<div class=\"entry input-group col-xs-3\"><input name=\"author[0]\" type =\"text\"
-					class=\"form-control\" value=\"".$value[0]."\" size=\"25\"/><span class=\"input-group-btn\">
-                            <button class=\"btn btn-success btn-add\" type=\"button\" onclick=\"addAuthor()\">
-                                +
-                            </button>
-                        </span></div>";	
+				echo "<div class=\"entry input-group col-xs-3\"><p name=\"author[0]\"
+					class=\"form-control\">".$value[0]."</p></div>";	
 			}
 
 			echo "</div></td>";
@@ -190,6 +191,7 @@
 
 				echo "<td>".$row[1]."</td>";
 				echo "<td>".$row[2]."</td>";
+				echo "<td><a href=\"details.php?isbn=".$row[2]."\" class=\"btn btn-primary\">Details</a></td>";
 				echo "</tr>";
 			
 			
@@ -244,8 +246,9 @@
 
 		public function updateBookInfo($title,$author,$year,$isbn){
 
-			$update = "UPDATE books SET title ='$title', author = '$author',
+			$update = "UPDATE books SET title ='$title',
 						year='$year' WHERE ISBN = '$isbn'";
+
 
 			$result = $this->db->query($update);
 
