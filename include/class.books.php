@@ -163,6 +163,39 @@
 				echo "</tr>";
 			}
 		}
+		public function search($finder){
+
+		$library_query = "SELECT * FROM books WHERE title LIKE '%".$finder."%'";
+
+			$result = $this->db->query($library_query);
+
+			if(!$result)
+				printError($this->db->error);
+
+			$auth = new Authors();
+
+			while ($row = $result->fetch_array(MYSQLI_NUM)){
+				$authors = $auth->getAuthors($row[2]);
+
+				echo "<tr>";
+				echo "<td>".$row[0]."</td>";
+				
+				//TODO: print all authors
+				echo "<td>";
+				foreach($authors as $value){
+					echo $value[0]."<br>";
+				}
+				echo "</td>";
+
+
+				echo "<td>".$row[1]."</td>";
+				echo "<td>".$row[2]."</td>";
+				echo "</tr>";
+			
+			
+			}
+		}
+
 
 		public function printBookDetails($isbn){
 			if($this->exists($isbn)){

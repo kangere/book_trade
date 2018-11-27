@@ -15,7 +15,7 @@
 		echo "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\"> <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button><strong>Warning!</strong>". $message . "</div>";
 	}
 
-	function getNavBar($fname,$lname){
+	function getNavBar($fname,$lname,$email){
 		echo "<nav class=\"navbar navbar-expand-lg navbar-light  justify-content-between\" style=\"background-color: #e3f2fd;\">
 		  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
 		    <span class=\"navbar-toggler-icon\"></span>
@@ -35,8 +35,8 @@
 		        <a class=\"nav-link\" href=\"trades.php\">My Transactions</a>
 		      </li>
 		    </ul>
-		    <form class=\"form-inline my-2 my-lg-0\">
-      			<input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">
+		    <form action=\"search-form.php\" class=\"form-inline my-2 my-lg-0\">
+      			<input class=\"form-control mr-sm-2\" type=\"text\" name=\"title\"placeholder=\"Search By Title\" aria-label=\"Search\">
       			<button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>
     		</form>
 		  </div>
@@ -46,8 +46,8 @@
 		          ".$fname." ".$lname."
 		        </a>
 				<div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">
-		          	<a class=\"dropdown-item\" href=\"#\">Edit Profile</a>
-		          	<a class=\"dropdown-item\" href=\"#\">Change Password</a>
+		          	<a class=\"dropdown-item\" href=\"editProfile.php?email=".$email."\">Edit Profile</a>
+		          	<a class=\"dropdown-item\" href=\"changepassword.php?email=".$email."\">Change Password</a>
 		          	<div class=\"dropdown-divider\"></div>
 		          	<a class=\"dropdown-item\" href=\"home.php?q=logout\">Logout</a>
 		        </div>

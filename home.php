@@ -16,8 +16,8 @@
 
 
 	$fname = $_SESSION['fname'];
-	$lname = $_SESSION['lname'];
-  $email = $_SESSION['email'];
+  $lname = $_SESSION['lname'];
+  $email = $_SESSION['email']; 
 
 
 	if(isset($_GET['q'])){
@@ -122,7 +122,7 @@
   }
 </script>
 
-<?php getNavBar($fname,$lname) ?>
+<?php getNavBar($fname,$lname,$email) ?>
 </head>
 <body>
     
