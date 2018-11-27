@@ -28,8 +28,25 @@
 			}
 		}
 
+		public function getBookTitle($isbn)
+		{
+			$query = "SELECT title FROM books WHERE isbn = '$isbn'";
+
+			$result = $this->db->query($query);
+
+			if(!$result){
+				printError("Could not find book title");
+				return "No Title";
+			}
+
+			$row = $result->fetch_array(MYSQLI_NUM);
+
+			return $row[0];
+
+		}
+
 		//Insert new book
-		public function insert_book($email,$title,$author,$year,$isbn){
+		public function insert_book($email,$title,$author,$year,$isbn,$condition){
 
 			if(!$this->exists($isbn)){
 				$insert_sql = "INSERT INTO books(title,year,isbn)
@@ -49,7 +66,7 @@
 
 			$ownedTable = new OwnedBooks();
 
-			$o_inserted = $ownedTable->insertBook($email,$isbn);
+			$o_inserted = $ownedTable->insertBook($email,$isbn,$condition);
 
 
 			if($o_inserted){
@@ -131,7 +148,7 @@
 				echo "<tr>";
 				echo "<td>".$row[0]."</td>";
 				
-				//TODO: print all authors
+				
 				echo "<td>";
 				foreach($authors as $value){
 					echo $value[0]."<br>";
@@ -145,6 +162,51 @@
 					$row[2]."\">Update</a></td>";
 				echo "</tr>";
 			}
+		}
+
+		public function printBookDetails($isbn){
+			if($this->exists($isbn)){
+
+				$sql = "SELECT * FROM books WHERE isbn='$isbn'";
+
+				$result = $this->db->query($sql);
+
+
+				echo "<table class=\"table\">";
+				echo"<thead class=\"thead-dark\">";		
+				echo "<tr>" ;    
+				echo "<th scope =\"col\">Title</th>";         
+				echo "<th scope =\"col\">Author</th>";         
+				echo "<th scope =\"col\">Year</th>" ;        
+				echo "<th scope =\"col\">ISBN</th>";         
+				echo "</tr>";       
+				echo "</thead>";     
+				echo "<tbody>";
+
+				$auth = new Authors();
+
+				while ($row = $result->fetch_array(MYSQLI_NUM)){
+					$authors = $auth->getAuthors($row[2]);
+
+					echo "<tr>";
+					echo "<td>".$row[0]."</td>";
+					echo "<td>";
+					foreach($authors as $value){
+						echo $value[0]."<br>";
+					}
+					echo "</td>";
+
+
+					echo "<td>".$row[1]."</td>";
+					echo "<td>".$row[2]."</td>";
+					echo "</tr>";
+
+				}
+				echo "</tbody></table>";
+			} else {
+				printError("Unable to retrieve details");
+			}
+
 		}
 
 		public function updateBookInfo($title,$author,$year,$isbn){

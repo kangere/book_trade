@@ -106,7 +106,7 @@ h1,h2{
 <form action = ""
           method = "post" name="login">
   <div class="container">
-    <h1> Ethio-Kenya Bookstore </h1>
+    <h1> Bookstore </h1>
     
     <h1>Log In</h1>
 

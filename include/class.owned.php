@@ -13,10 +13,10 @@
 		}
 
 
-		public function insertBook($email,$isbn){
+		public function insertBook($email,$isbn,$condition){
 
-			$insert_sql = "INSERT INTO ownedBooks(email,isbn)
-							VALUES ('$email','$isbn')";
+			$insert_sql = "INSERT INTO ownedBooks(email,isbn,book_cond)
+							VALUES ('$email','$isbn','$condition')";
 
 			$check = $this->db->query($insert_sql);
 

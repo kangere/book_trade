@@ -14,5 +14,6 @@ sudo cp main.js $dest
 sudo cp details.php $dest
 sudo cp requests.php $dest
 sudo cp request_book.php $dest
+sudo cp trades.php $dest
 
 echo "files copied successfully"

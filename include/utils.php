@@ -28,6 +28,12 @@
 		      <li>
 		        <a class=\"nav-link\" href=\"Store.php\">Book Store <span class=\"sr-only\">(current)</span></a>
 		      </li>
+		      <li class=\"nav-item\">
+		        <a class=\"nav-link\" href=\"requests.php\">My Requests</a>
+		      </li>
+		      <li class=\"nav-item\">
+		        <a class=\"nav-link\" href=\"trades.php\">My Transactions</a>
+		      </li>
 		    </ul>
 		    <form class=\"form-inline my-2 my-lg-0\">
       			<input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">

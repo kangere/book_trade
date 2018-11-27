@@ -37,12 +37,9 @@
       $author = $_POST['author'];
       $year = $_POST['year'];
       $isbn = $_POST['isbn'];
+      $cond  = $_POST['condition'];
 
-      /*foreach($author as $key=>$value){
-        echo $value . "\n";
-      }*/
-
-      if($book->insert_book($email,$title,$author,$year,$isbn)){
+      if($book->insert_book($email,$title,$author,$year,$isbn,$cond)){
          printSuccess("Book Inserted");
       }
          
@@ -175,6 +172,19 @@
             <div class ="form-group">
               <label for="isbn"><b>ISBN</b></label>
               <input type="text" class ="form-control" placeholder="Enter Book ISBN" name="isbn" required>
+            </div>
+
+            <div class ="form-group">
+              <label for="isbn"><b>Book Condition</b></label>
+              <div class="radio">
+                <label><input type="radio" name="condition" checked>Like-New</label>
+              </div>
+              <div class="radio">
+                <label><input type="radio" name="condition">Used</label>
+              </div>
+              <div class="radio">
+                <label><input type="radio" name="condition">Damaged</label>
+              </div>
             </div>
 
               <input type="submit" class ="btn btn-primary"name="addBook" value="Add Book"/>

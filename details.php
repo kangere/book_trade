@@ -4,8 +4,10 @@
 	include_once "include/class.owned.php";
 	include_once "include/class.user.php";
 	include_once "include/utils.php";
+	include_once "include/class.books.php";
 
 	$user = new User();
+	$book = new Book();
 
 	//get session info
 	$fname = $_SESSION['fname'];
@@ -18,7 +20,8 @@
 	
 	$isbn = $_GET['isbn'];
 
-	$url = 'https://api.isbndb.com/book/'.$isbn;  
+	//TODO: FIX API Usage when book is not found
+	/*$url = 'https://api.isbndb.com/book/'.$isbn;  
  	$restKey = '7P8UAfqbCZ6siLJ8bUYet3pRMdiF6EJq5E5RBtyD';  
  
 	$headers = array(  
@@ -33,6 +36,7 @@
 	 
 	$response = curl_exec($rest);  
 
+	echo $response;
 
 	$jsonIterator = new RecursiveIteratorIterator(
     new RecursiveArrayIterator(json_decode($response, TRUE)),
@@ -41,7 +45,7 @@
 	$arr = json_decode($response,true);
 
 	
-	curl_close($rest);  
+	curl_close($rest);  */
 
 
 	$own = new OwnedBooks();
@@ -59,7 +63,12 @@
 <body>
 	<?php getNavBar($fname,$lname);?>
 
-	<div class="container">
+	<?php 
+		echo "<br><br>";
+		$book->printBookDetails($isbn);
+		echo "<br><br>";
+	?>
+	<!-- <div class="container">
 		<div class="row">
 			<div class="col-sm">
 				<?php echo "<img class=\"img-fluid\" src=\"".$arr["book"]["image"]."\">" ?>
@@ -80,7 +89,7 @@
 				}
 
 			 ?>
-	</div>
+	</div> -->
 
 	<?php $own->printBookOwners($isbn,$email);?>
 
