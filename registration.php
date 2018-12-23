@@ -1,5 +1,6 @@
 <?php
 	include_once 'include/class.user.php';
+  include_once 'include/class.notify.php';
     include_once 'include/utils.php';
 
 	$user = new User();
@@ -11,8 +12,14 @@
 		
 
 		if($register){
+      $notify = new Notify();
+      
+      $message = "Congragulations ".$fname." you have successfully registered for the book trade service";
+
+      $notify->notifyUser($email,'Registration',$message);
+
 			//Registration successful
-            header("location:login.php");
+      header("location:login.php");
 		} else {
 			printError('Registration failed. Email or Username already exists please try again');
 		}
@@ -84,10 +91,29 @@ h1,h2{
 <body>
 
 <script >
+  function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+   
+    return re.test(String(email).toLowerCase());
+  }
+
+  function validate(){
+    var email = document.getElementById("email").value;
+
+    if(validateEmail(email)){
+      document.getElementById("isValid").style.visibility = "visible";
+      document.getElementById("notValid").style.visibility = "hidden";
+    } else {
+      document.getElementById("isValid").style.visibility = "hidden";
+      document.getElementById("notValid").style.visibility = "visible"; 
+    }
+
+  }
+
 	 function submitreg() {
 		 var form = document.reg;
-		 if(form.email.value == ""){
-		 alert( "Enter email" );
+		 if(form.email.value == "" ||  !validateEmail(form.email.value)){
+		 alert( "Invalid or Empty email" );
 		 return false;
 
 	 	} else if(form.fname.value == ""){
@@ -112,25 +138,29 @@ h1,h2{
 <form action = ""
           method = "POST" name="reg">
   <div class="container">
-    <h1> Ethio-Kenya Bookstore </h1>
+    <h1> Bookstore </h1>
     <h2>Sign Up</h2>
     <p>Please fill in this form to create an account.</p>
     <hr>
     <label for="loginEmail"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="text" onkeydown="validate()" placeholder="Enter Email" name="email" id ="email" required>
+    <span class="badge badge-pill badge-success" id ="isValid" style="visibility:hidden" >Valid Email</span>
+    <span class="badge badge-pill badge-danger" id="notValid" style="visibility:hidden" >Invalid Email</span> <br>
 
     <label for="firstName"><b>First Name</b></label>
     <input type="text" placeholder="Enter first Name" name="fname" required>
 
     <label for="lastName"><b>Last Name</b></label>
-    <input type="text" placeholder="Enter flast Name" name="lname" required>
+    <input type="text" placeholder="Enter last Name" name="lname" required>
 
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="password" required>
     
-    <div class="clearfix">
-      <input onclick="return(submitreg());" type="submit" name="submit" value ="Register" class="signupbtn"/>
-    </div>  
+    
+      <input class ="btn btn-primary" onclick="return(submitreg());" type="submit" name="submit" value ="Register"/>
+
+      <a href="login.php" class ="btn btn-primary">Login</a>
+     
 
     
   </div>

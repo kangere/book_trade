@@ -53,20 +53,16 @@
     
   }
 
-  if(isset($_POST['deleteBook'])){
+  if(isset($_GET['deleteBook'])){
 
-    if(isset($_POST['isbn_delete'])){
+    $isbn_del = $_GET['isbn_delete'];
 
-      $isbn_del = $_POST['isbn_delete'];
+    if($owned->deleteBookOwned($email,$isbn_del))
+        printSuccess("Book Deleted");
+    else
+        printError("Couldn't delete book");
 
-      if($owned->deleteBookOwned($email,$isbn_del))
-          printSuccess("Book Deleted");
-      else
-          printError("Couldn't delete book");
-
-    } else {
-      printWarning("Isbn needed to delete book");
-    }
+    
   }
 
 ?>
@@ -194,20 +190,6 @@
           </form>
         </div>
       </div>
-      <div class="card" style="width: 18rem;">
-        <div class="card-head"><h3> Delete Book</h3></div>
-        <div class="card-body">
-          <form method="post" action="home.php">
-            <div class ="form-group">
-              <label for="isbn"><b>ISBN</b></label>
-              <input type="text" class ="form-control" placeholder="Enter Book ISBN" name="isbn_delete" required>
-            </div>
-             <input class="btn btn-danger" type = "submit"  name = "deleteBook"  value = "Delete Book" />
-          </form>
-        </div>
-      </div>
       
-<br><br>
-<a href="home.php?q=logout">LOGOUT</a>
 </body>
 </html>

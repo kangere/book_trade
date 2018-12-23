@@ -161,12 +161,14 @@
 				echo "<td>".$row[2]."</td>";
 				echo "<td align=\"center\"><a href=\"update.php?isbn=".
 					$row[2]."\">Update</a></td>";
-				echo "</tr>";
+				echo "<td align=\"center\"><a href=\"home.php?deleteBook=delete&isbn_delete=".
+					$row[2]."\">Delete</a></td>";
+				echo "</tr>"; 
 			}
 		}
 		public function search($finder){
 
-		$library_query = "SELECT * FROM books WHERE title LIKE '%".$finder."%'";
+		$library_query = "SELECT DISTINCT * FROM books WHERE title LIKE '%".$finder."%'";
 
 			$result = $this->db->query($library_query);
 

@@ -20,8 +20,8 @@
 	
 	$isbn = $_GET['isbn'];
 
-	//TODO: FIX API Usage when book is not found
-	/*$url = 'https://api.isbndb.com/book/'.$isbn;  
+	
+	$url = 'https://api.isbndb.com/book/'.$isbn;  
  	$restKey = '7P8UAfqbCZ6siLJ8bUYet3pRMdiF6EJq5E5RBtyD';  
  
 	$headers = array(  
@@ -36,16 +36,12 @@
 	 
 	$response = curl_exec($rest);  
 
-	echo $response;
-
-	$jsonIterator = new RecursiveIteratorIterator(
-    new RecursiveArrayIterator(json_decode($response, TRUE)),
-    RecursiveIteratorIterator::SELF_FIRST);
-
 	$arr = json_decode($response,true);
 
+
 	
-	curl_close($rest);  */
+	curl_close($rest);
+
 
 
 	$own = new OwnedBooks();
@@ -61,37 +57,51 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
 <body>
-	<?php getNavBar($fname,$lname,$email);?>
-
 	<?php 
+		getNavBar($fname,$lname,$email);
+
 		echo "<br><br>";
 		$book->printBookDetails($isbn);
 		echo "<br><br>";
-	?>
-	<!-- <div class="container">
-		<div class="row">
-			<div class="col-sm">
-				<?php echo "<img class=\"img-fluid\" src=\"".$arr["book"]["image"]."\">" ?>
-			</div>
-			
-		</div>	
-	</div>
-	<div class="conatiner-fluid">
 
-				<?php echo "<h3 >".$arr["book"]["title"]."</h3>";
+	 	$own->printBookOwners($isbn,$email);
+
+			echo "<br><br>";
+			echo "<h3>Extra Details </h3>";
+			if(!empty($arr)){
+
+				$jsonIterator = new RecursiveIteratorIterator(
+				    new RecursiveArrayIterator($arr),
+				    RecursiveIteratorIterator::SELF_FIRST);
+
+				$alt_image = "no_image.png";
+				echo "<div class=\"container\">";
+				echo "<div class=\"row\">";
+				echo "<div class=\"col-sm\">";
+				echo "<div class=\"card\" style=\"width: 18rem;\">";
+				echo "<img class=\"card-img-card\" src=\"".(!empty($arr["book"]["image"]) ? $arr["book"]["image"] : $alt_image)."\">";
+				echo "<div class=\"card-body\">";
+				echo "<h5 class=\"card-title\">".$arr["book"]["title"]."</h5>";
+				echo "</div></div></div>";
+
+				echo "<div class=\"col\">";
+				echo "<p>Subjects:</p>";
 
 				foreach ($jsonIterator as $key => $val) {
 				    if(is_array($val)) {
-				        echo "<h6>$key:</h6>";
+				        echo "<p>$key:</p>";
 				    } else {
-				        echo "<h6>$val</h6>";
+				        echo "<p>$val</p>";
 				    }
 				}
+				echo "</div>";
+	
+				
+				echo "</div></div>";
 
-			 ?>
-	</div> -->
+			}
 
-	<?php $own->printBookOwners($isbn,$email);?>
+	?>
 
 
 

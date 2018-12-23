@@ -116,13 +116,17 @@ h1,h2{
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="password" required>
   
-    <div class="clearfix">
-      <input onclick="return(submitlogin());" type="submit" name="submit" value="Login" class="loginbtn"/>
-    </div>
     
+    <input class ="btn btn-primary" onclick="return(submitlogin());" type="submit" name="submit" value="Login"/>
+   
+    
+    <a href="registration.php" class ="btn btn-primary">Register new user</a>
   </div>
 </form>
-<a href="registration.php">Register new user</a>
 
+<br><br>
+<!-- <a href="help_doc.html" class="btn btn-link" >Help </a>
+<a href="https://docs.google.com/document/d/1Sc8L4olsGSvTdXg5Ou3U9wEW8ZRyUn0QAzxxkBSFjDU/edit?usp=sharing" class="btn btn-link" >Technical Documentation </a>
+<a href="https://docs.google.com/document/d/1ccySpZeybLTTJ5EoUl1fEDnuZdLZR0iyueQir1K5C0w/edit?usp=sharing" class="btn btn-link" >Report</a> -->
 </body>
 </html>

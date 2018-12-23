@@ -27,7 +27,7 @@
 		}
 		public function get_ownedbooks(){
 			
-			$library_query = "SELECT title,year, b.isbn FROM books b JOIN ownedBooks ob on b.isbn = ob.isbn WHERE ob.isbn NOT IN (SELECT owned_book FROM requests UNION SELECT req_book FROM requests)";
+			$library_query = "SELECT DISTINCT title,year, b.isbn FROM books b JOIN ownedBooks ob on b.isbn = ob.isbn WHERE ob.isbn NOT IN (SELECT owned_book FROM requests UNION SELECT req_book FROM requests)";
 
 			$result = $this->db->query($library_query);
 			

@@ -18,5 +18,14 @@ sudo cp trades.php $dest
 sudo cp changepassword.php $dest
 sudo cp search-form.php $dest
 sudo cp editProfile.php $dest
+sudo cp mailTest.php $dest
+sudo cp help_doc.html $dest
+sudo cp img1.png $dest
+sudo cp img10.png $dest
+sudo cp img2.png $dest
+sudo cp img6.png $dest
+sudo cp img7.png $dest
+sudo cp img8.png $dest
+
 
 echo "files copied successfully"
